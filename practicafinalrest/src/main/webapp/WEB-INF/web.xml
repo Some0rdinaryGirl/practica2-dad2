@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
-  <display-name>practicafinalrest</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-  </welcome-file-list>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="5.0"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+                             https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd">
+
+    <!-- SERVLET PRINCIPAL MVC -->
+    <servlet>
+        <servlet-name>ControladorPrincipal</servlet-name>
+        <servlet-class>edu.ucam.servlets.Control</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ControladorPrincipal</servlet-name>
+        <url-pattern>/control</url-pattern>
+    </servlet-mapping>
+
+    <!-- SERVICIO REST (Jersey 3) -->
+    <servlet>
+        <servlet-name>JerseyREST</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <!-- Indica dónde están tus clases REST -->
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>edu.ucam.rest</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JerseyREST</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>
